@@ -8,31 +8,43 @@ class Program{
         int small;
         int next = 0;
         String answer = "";
+        String current;
         Scanner in = new Scanner(System.in);
-        while (check){
+        while (check && (count < 19)){
             count++;
-            String current = in.nextLine();
+            current = in.nextLine();
             small = 10;
             if(current.equals("42"))break;
-            if (in.findInLine("Week " + String.valueOf(count)) != "")
+            if (current.equals("Week " + String.valueOf(count)))
             {
+                //in.nextLine();
+                for (int i = 0; i < 5; i++)
+                {
+                    next = in.nextInt();
+                    if (next > 0 && next < 10)
+                    {
+                        if (next < small)
+                            small = next;
+                    }
+                    else{
+                        check = false;
+                        break;
+                    }
+                }
+                if(check) {
                 in.nextLine();
+                while (small > 0){
+                    answer+="=";
+                    small--;
+                }
+                answer+=">\n";
+            }
                // in.findInLine("Week " + count))current.equals("Week " + count)
             }
-            for (int i = 0; i < 5; i++)
-            {
-                next = in.nextInt();
-                if (next < small)
-                    small = next;
-            }
-            while (small > 0){
-                answer+="=";
-                small--;
-            }
-            answer+=">\n";
-           
+            else
+                check = false;          
         }
         in.close();
-        System.out.println(answer);
+        if (answer != "") System.out.print(answer);
     }
 }
