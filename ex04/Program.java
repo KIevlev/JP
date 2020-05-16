@@ -1,47 +1,110 @@
 import java.lang.reflect.Array;
 import java.util.Scanner;
+import java.util.Arrays;
 
 class Program {
     public static void main(final String args[]) {
     Scanner in = new Scanner(System.in);
     String current = in.nextLine();
     char[] arr = current.toCharArray();
-    //char[] words = new char[arr.length];
-    int[][] count = new int[2][arr.length];
-    char[][] answer = new char[10][12];
+    char[] words = new char[arr.length];
+    int[][] count;
+    int max;
+    int vse;
+    //int[][] count = new int[2][arr.length];
+    
     if (arr != null)
     {
-        count[0][0] = arr[0];
+        //count[0][0] = arr[0];
         int i = 0;
         for (int j = 0; j < arr.length; j++){
-            if (!mass(count[0], arr[j]))
+            if (!mass(words, arr[j]))
             {
-                count[0][i] = (int)arr[j];
-                count[1][i] = 1;
+                words[i] = arr[j];
                 i++;
             }
-            else{
-                count[1][i]= count[1][i] + 1;
+        }
+        count = new int[2][i];
+        for (int j = 0; j < i; j++){
+            count[0][j] = (int)words[j];
+        }
+        for (int k = 0; k < i; k++){
+            for(int j = 0; j < arr.length; j++)
+            {
+                if (arr[j] == (char)count[0][k])
+                    count[1][k]++;
             }
         }
+        //для проверки
+        for (int c = 0; c < count.length; c++) {
+            System.out.println();
+            for (int j = 0; j < count[c].length; j++) {
+                if (c == 0)
+                System.out.print((char)count[c][j]+" ");
+                else
+                System.out.print(count[c][j]+" ");
+            }}
+            System.out.println();
+        //сортировка
+        for(int k = count[0].length-1 ; k > 0 ; k--){
+            for(int j = 0 ; j < k ; j++){
+                if( count[1][j] < count[1][j+1] ){
+                    int tmp = count[1][j];
+                    int tmp1 = count[0][j];
+                    count[1][j] = count[1][j+1];
+                    count[0][j] = count[0][j+1];
+                    count[1][j+1] = tmp;
+                    count[0][j+1] = tmp1;
+                }
+            }
+        }
+        //для проверки
+        for (int c = 0; c < count.length; c++) {
+            System.out.println();
+            for (int j = 0; j < count[c].length; j++) {
+                if (c == 0)
+                System.out.print((char)count[c][j]+" ");
+                else
+                System.out.print(count[c][j]+" ");
+            }}
+            System.out.println();
+        
+        max = count[1][0];
+        //System.out.println(max);
+        vse = (count[0].length <= 10) ? count[0].length : 10; //кол-во столбцов
+        int[][] answer = new int[12][vse];
+        int k;
+        for (int j = 0; j < vse; j++)
+        {
+            k = 0;
+            answer[11][j] = count[0][j];
+            while (k < (int)count[1][j]*10/max){
+                answer[10 - k][j] = '#';
+                k++;
+            }
+            answer[10 - k][j] = count[1][j];
+        }
+
+        for (int c = 0; c < answer.length; c++) {
+            System.out.println();
+            for (int j = 0; j < answer[c].length; j++) {
+                if (c == 11 || answer[c][j] == 0)
+                    System.out.print((char)answer[c][j]+"   ");
+                else if (c == 0 || answer[c-1][j] == 0)
+                    System.out.print(answer[c][j]+"   ");
+                else
+                System.out.print((char)answer[c][j]+"   ");
+            }}
     }
 
     in.close();
-    for (int i = 0; i < count.length; i++) {
-        System.out.println();
-        for (int j = 0; j < count[i].length; j++) {
-            if (i == 0)
-                System.out.print((char)count[i][j]+" ");
-            else
-                System.out.print(count[i][j]+" ");
-        }
-    }
+    
      System.out.println();
 }
-    static boolean mass(int[] words, char a){
+    static boolean mass(char[] words, char a){
         for (int i = 0; i < words.length; i++)
         {
-            if ((char)words[i] == a)
+            if (words[i] == a)
                 return true;
         }
         return false;
