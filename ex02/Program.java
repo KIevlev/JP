@@ -11,7 +11,9 @@ class Program{
             sum = 0;
             num = in.nextInt();
             if (num == 42)
+            {
                 check = false;
+            }
             while (num > 0){
                 sum+=num%10;
                 num /= 10;
