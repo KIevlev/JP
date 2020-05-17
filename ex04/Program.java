@@ -38,7 +38,6 @@ class Program {
                     count[1][k]++;
             }
         }
-        //сортировка
         for(int k = count[0].length-1 ; k > 0 ; k--){
             for(int j = 0 ; j < k ; j++){
                 if( count[1][j] < count[1][j+1] ){
@@ -75,8 +74,6 @@ class Program {
                 System.out.print(count[c][j]+" ");
             }}
             System.out.println();
-
-
         int r;
         for (int j = 0; j < vse; j++)
         {
