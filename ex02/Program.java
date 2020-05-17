@@ -14,22 +14,18 @@ class Program{
                 check = false;
             while (num > 0){
                 sum+=num%10;
-                num=num>>1;
+                num /= 10;
             }
-            if (simple(sum)){
-                count++;
+            int prov = 1;
+            for (int i = 2; i <= sum/i; i++){
+                if (sum % i == 0){
+                    prov = 0;
+                    break;
+                }
             }
+            count = (prov == 1) ? count + 1 : count;
         }
         in.close();
         System.out.printf("Count of coffee-request - %d\n", count);
-    }
-    static boolean simple(final int num){
-
-            for (int i = 2; i <= num/i; i++){
-                if (num % i == 0){
-                    return false;
-                }
-            }
-            return true;
     }
 }

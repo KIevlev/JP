@@ -11,14 +11,19 @@ class Program {
     int[][] count;
     int max;
     int vse;
-    //int[][] count = new int[2][arr.length];
     
-    if (arr != null)
+    if (arr.length > 0)
     {
-        //count[0][0] = arr[0];
         int i = 0;
         for (int j = 0; j < arr.length; j++){
-            if (!mass(words, arr[j]))
+            boolean a = false;
+            for (int k = 0; k < words.length; k++)
+            {
+            if (words[k] == arr[j])
+                 a = true;
+            }
+            a = (a == true) ? a : false;
+            if (!a)
             {
                 words[i] = arr[j];
                 i++;
@@ -70,8 +75,7 @@ class Program {
             System.out.println();
         
         max = count[1][0];
-        //System.out.println(max);
-        vse = (count[0].length <= 10) ? count[0].length : 10; //кол-во столбцов
+        vse = (count[0].length <= 10) ? count[0].length : 10;
         int[][] answer = new int[12][vse];
         int k;
         for (int j = 0; j < vse; j++)
@@ -95,18 +99,9 @@ class Program {
                 else
                 System.out.print((char)answer[c][j]+"   ");
             }}
+            System.out.println();
     }
 
     in.close();
-    
-     System.out.println();
 }
-    static boolean mass(char[] words, char a){
-        for (int i = 0; i < words.length; i++)
-        {
-            if (words[i] == a)
-                return true;
-        }
-        return false;
-    }
 }

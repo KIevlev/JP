@@ -1,5 +1,4 @@
 import java.util.Scanner;
-//import java.util.regex.Pattern;
 
 class Program{
     public static void main(String args[]) {
@@ -17,7 +16,7 @@ class Program{
             if(current.equals("42"))break;
             if (current.equals("Week " + String.valueOf(count)))
             {
-                //in.nextLine();
+                answer += current + " ";
                 for (int i = 0; i < 5; i++)
                 {
                     next = in.nextInt();
@@ -31,6 +30,10 @@ class Program{
                         break;
                     }
                 }
+                if (in.hasNextInt())
+                {
+                    check = false;
+                }
                 if(check) {
                 in.nextLine();
                 while (small > 0){
@@ -39,12 +42,11 @@ class Program{
                 }
                 answer+=">\n";
             }
-               // in.findInLine("Week " + count))current.equals("Week " + count)
             }
             else
                 check = false;          
         }
         in.close();
-        if (answer != "") System.out.print(answer);
+        if (check) System.out.print(answer);
     }
 }

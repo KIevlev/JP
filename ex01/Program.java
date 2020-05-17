@@ -11,12 +11,12 @@ class Program{
         }
         else{
             for (int i = 2; i <= num/i; i++){
+                count++;
                 if (num % i == 0){
                     System.out.printf("false %d\n", count);
                     check = false;
                     break;
                 }
-                count++;
             }
             if (check)
                 System.out.printf("true %d\n", count);
