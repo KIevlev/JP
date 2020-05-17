@@ -1,6 +1,4 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
-import java.util.Arrays;
 
 class Program {
     public static void main(final String args[]) {
@@ -40,16 +38,6 @@ class Program {
                     count[1][k]++;
             }
         }
-        //для проверки
-        for (int c = 0; c < count.length; c++) {
-            System.out.println();
-            for (int j = 0; j < count[c].length; j++) {
-                if (c == 0)
-                System.out.print((char)count[c][j]+" ");
-                else
-                System.out.print(count[c][j]+" ");
-            }}
-            System.out.println();
         //сортировка
         for(int k = count[0].length-1 ; k > 0 ; k--){
             for(int j = 0 ; j < k ; j++){
@@ -63,20 +51,9 @@ class Program {
                 }
             }
         }
-        //для проверки
-        for (int c = 0; c < count.length; c++) {
-            System.out.println();
-            for (int j = 0; j < count[c].length; j++) {
-                if (c == 0)
-                System.out.print((char)count[c][j]+" ");
-                else
-                System.out.print(count[c][j]+" ");
-            }}
-            System.out.println();
-        
         max = count[1][0];
         vse = (count[0].length <= 10) ? count[0].length : 10;
-        int[][] answer = new int[12][vse];
+        int[][] answer = new int[13][vse];
         int k;
         for (int j = 0; j < vse; j++)
         {
@@ -89,19 +66,56 @@ class Program {
             answer[10 - k][j] = count[1][j];
         }
 
-        for (int c = 0; c < answer.length; c++) {
+        for (int c = 0; c < count.length; c++) {
+            System.out.println();
+            for (int j = 0; j < count[c].length; j++) {
+                if (c == 0)
+                System.out.print((char)count[c][j]+" ");
+                else
+                System.out.print(count[c][j]+" ");
+            }}
+            System.out.println();
+
+
+        int r;
+        for (int j = 0; j < vse; j++)
+        {
+            int c = count[1][j];
+            r = 0;
+            while (c > 0){
+                r++;
+                c /= 10;
+            }
+            answer[12][j] = r;
+        }
+        int con;
+        for (int c = 0; c < answer.length - 1; c++) {
             System.out.println();
             for (int j = 0; j < answer[c].length; j++) {
                 if (c == 11 || answer[c][j] == 0)
-                    System.out.print((char)answer[c][j]+"   ");
+                    {
+                        con = answer[12][j];
+                        while(con > 1){
+                            System.out.print(" ");
+                            con--;
+                        }
+                        System.out.print("   " + (char)answer[c][j]);
+                    }
+                    
                 else if (c == 0 || answer[c-1][j] == 0)
-                    System.out.print(answer[c][j]+"   ");
+                    System.out.print("   " + answer[c][j]);
                 else
-                System.out.print((char)answer[c][j]+"   ");
+                {
+                    con = answer[12][j];
+                    while(con > 1){
+                        System.out.print(" ");
+                        con--;
+                    }
+                System.out.print("   "+(char)answer[c][j]);
+                }
             }}
             System.out.println();
     }
-
     in.close();
 }
 }
